@@ -26,7 +26,9 @@ public class updateHUD : MonoBehaviour {
 	public GameObject Mesh;
 	public Texture2D dataSet;
 	/* ****************  GLOBAL OBJECTS  ****************  */
-	Text text_1, text_2, text_3;
+	private Text text_1;
+	private Text text_2;
+	private Text text_3;
 	/*********************************************************************
 	                             BOOT
 	 *********************************************************************/

@@ -22,7 +22,7 @@ public class ToggleLayers : MonoBehaviour {
 	public Renderer[] rend;
 	public Material blank;
 	/* ****************  GLOBAL OBJECTS  ****************  */
-	Material[] layersTempCopy;
+	private Material[] layersTempCopy;
 	/*********************************************************************
 	                             BOOT
 	*********************************************************************/

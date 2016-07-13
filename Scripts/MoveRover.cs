@@ -29,7 +29,7 @@ public class MoveRover : MonoBehaviour {
 	private float currentTorque;
 	private float currentSteerAngle;
 	private float[] rotationValue = {0f, 0f, 0f, 0f, 0f, 0f};
-	Vector3 startPos;
+	private Vector3 startPos;
 	/*********************************************************************
 	                             BOOT
 	*********************************************************************/

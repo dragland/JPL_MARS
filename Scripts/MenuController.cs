@@ -22,7 +22,8 @@ public class MenuController : MonoBehaviour {
 	public GameObject controlsText;
 	public Image background;
 	/* ****************  GLOBAL OBJECTS  ****************  */
-	Text text_1, text_2;
+	private Text text_1;
+	private Text text_2;
 	/*********************************************************************
 	                             BOOT
 	 *********************************************************************/

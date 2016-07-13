@@ -19,10 +19,10 @@ public class OVRMovePLayer : MonoBehaviour {
 	/* ****************  EDITABLE CONSTANTS  ****************  */
 	public float transformVelocity = 10.0f;
 	public float rotateVelocity    = 1.0f;
-	public int hoverHeight         = 1;
+	public int hoverHeight         = 15;
 	/* ****************  GLOBAL OBJECTS  ****************  */
-	Vector3 startPos;
-	Quaternion startRot;
+	private Vector3 startPos;
+	private Quaternion startRot;
 	/*********************************************************************
 	                             BOOT
 	 *********************************************************************/
@@ -35,8 +35,11 @@ public class OVRMovePLayer : MonoBehaviour {
 	 *********************************************************************/
 	void Update () {
 		resetCheck();
-		transformPlayer(getTravelSpeed());
-		rotatePlayer();
+		if (Input.GetButton ("X_Button")) rotateAround(); 
+		else {
+			transformPlayer(getTravelSpeed());
+			rotatePlayer();
+		}
 	}
 
 	/**********************************************************************
@@ -65,7 +68,7 @@ public class OVRMovePLayer : MonoBehaviour {
     ---------------------------------
     This function updates the orientation of the player based 
     on the inputs from the user.
-	*/
+    */
 	void rotatePlayer(){
 		transform.Rotate(Vector3.down, rotateVelocity * Input.GetAxis("Horizontal_turn"), Space.World);
 		transform.Rotate(Camera.main.transform.TransformDirection(Vector3.left), rotateVelocity * Input.GetAxis("Vertical_turn"), Space.World);
@@ -110,6 +113,19 @@ public class OVRMovePLayer : MonoBehaviour {
 		if (Input.GetButton ("leftShift"))
 			return 5;
 		return 1;
+	}
+
+	/*
+	function: rotateAround
+	---------------------------------
+	This function rotates the camera around the reticle, while 
+	maintaining the global coordinate system.
+	*/
+	void rotateAround(){
+		Vector3 fwd = Camera.main.transform.TransformDirection (Vector3.forward);
+		RaycastHit hit;
+		if (!Physics.Raycast (Camera.main.transform.position, fwd, out hit)) return;
+		transform.RotateAround (hit.point, Vector3.up, Input.GetAxis("Horizontal_move"));
 	}
 
 	/*
