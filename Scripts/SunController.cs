@@ -22,13 +22,12 @@ using System.IO;
 public class SunController : MonoBehaviour {
 	/* ****************  EDITABLE CONSTANTS  ****************  */
 	public TextAsset xmlFile;
-	public string time = "SOL 1056 (2015=07-27 044609 UTC)";
 	/* ****************  GLOBAL OBJECTS  ****************  */
 	private Light sun;
 	private XmlDocument xmlDoc;
 	private Color tint;
 	private float intensity;
-	private Vector3 location;
+	private Vector3 rotation;
 	/*********************************************************************
 	                             BOOT
 	*********************************************************************/
@@ -42,30 +41,20 @@ public class SunController : MonoBehaviour {
 	 *********************************************************************/
 	void Update () {
 		resetCheck();
-		getData();
-		updateSunPosition();
+		updateSunRotation();
 		updateSunLight();
 	}
 	/**********************************************************************
 	                           FUNCTIONS
 	 *********************************************************************/
 	/*
-	function: getData
+	function: updateSunRotation
 	---------------------------------
-	This function updates the variables with the new values.
-	*/
-	void getData(){
-	}
-
-	/*
-	function: updateSunPosition
-	---------------------------------
-	This function updates the location of the light source with respect
+	This function updates the rotation of the light source with respect
 	to the Mars coordinate system.
 	*/
-	void updateSunPosition(){
-		sun.transform.transform.position = location;
-		transform.LookAt (new Vector3 (0, 0, 0));
+	void updateSunRotation(){
+		sun.transform.eulerAngles = rotation;
 	}
 
 	/*
@@ -83,6 +72,15 @@ public class SunController : MonoBehaviour {
 	                              HELPERS 
 	*********************************************************************/
 	/*
+	function: sunInit
+	---------------------------------
+	This function initializes the direction light as the Sun.
+	*/
+	void sunInit(){
+		sun = this.GetComponent<Light>();
+	}
+
+	/*
 	function: loadData
 	---------------------------------
 	This function loads the data from an external file.
@@ -93,31 +91,20 @@ public class SunController : MonoBehaviour {
 		XmlNodeList attributes = xmlDoc.GetElementsByTagName ("annotation");
 		foreach( XmlNode node in attributes){
 			XmlNodeList children = node.ChildNodes;
-			float x = 0, y = 0, z = 0, r = 0, b = 0, g = 0;
+			float r = 0, b = 0, g = 0, SOLAR_AZIMUTH = 0, SOLAR_ELEVATION = 0;
 			foreach (XmlNode child in children){
-				if(child.Name == "x") x = XmlConvert.ToSingle(child.InnerText);
-				if(child.Name == "y") y = XmlConvert.ToSingle(child.InnerText);
-				if(child.Name == "z") z  = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "RED") r = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "GREEN") g = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "BLUE") b = XmlConvert.ToSingle(child.InnerText);
 
-				if(child.Name == "r") r = XmlConvert.ToSingle(child.InnerText);
-				if(child.Name == "g") g = XmlConvert.ToSingle(child.InnerText);
-				if(child.Name == "b") b = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "INTENSITY") intensity = XmlConvert.ToSingle(child.InnerText);
 
-				if(child.Name == "i") intensity = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "SOLAR_AZIMUTH") SOLAR_AZIMUTH = XmlConvert.ToSingle(child.InnerText);
+				if(child.Name == "SOLAR_ELEVATION") SOLAR_ELEVATION = XmlConvert.ToSingle(child.InnerText);
 			}
-			location = new Vector3 (x, y, z);
+			rotation = new Vector3 (SOLAR_ELEVATION, SOLAR_AZIMUTH + 90, 0);
 			tint = new Color(r, g, b);
 		}
-	}
-
-	/*
-	function: sunInit
-	---------------------------------
-	This function initializes the direction light as the Sun.
-	*/
-	void sunInit(){
-		sun = this.GetComponent<Light>();
-
 	}
 
 	/*
