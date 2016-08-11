@@ -43,7 +43,7 @@ public class SunController : MonoBehaviour {
 		resetCheck();
 		updateSunRotation();
 		updateSunLight();
-		if (Input.GetKeyDown ("1")) updateSunShadows();
+		if (Input.GetButton("R_Bumper")) updateSunShadows();
 	}
 	/**********************************************************************
 	                           FUNCTIONS

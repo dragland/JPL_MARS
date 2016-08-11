@@ -54,7 +54,7 @@ public class MeshLoader : MonoBehaviour {
 	---------------------------------
 	This function get the tiles to be rendered.
 	*/
-	void  getTiles(){
+	void getTiles(){
 		Vector3 currPosition = player.transform.position;
 		Vector2 currTile = getCurrTile(currPosition);
 		int currSection = getCurrSection(currPosition, currTile);
@@ -66,7 +66,7 @@ public class MeshLoader : MonoBehaviour {
 	---------------------------------
 	This function renders the tiles in the newTile array.
 	*/
-	void  renderTiles(){
+	void renderTiles(){
 		for (int i = 0; i < tileArraySize; i++) {
 			if(isNotIn(i, newTiles, oldTiles)){
 				string URLPath = calculateTilePath(newTiles[i].address);
@@ -80,7 +80,7 @@ public class MeshLoader : MonoBehaviour {
 	---------------------------------
 	This function deletes the tiles in the oldTile array.
 	*/
-	void  deleteTiles(){
+	void deleteTiles(){
 		for (int i = 0; i < tileArraySize; i++) {
 			if(isNotIn(i, oldTiles, newTiles) || (i != 0 && oldTiles[0].address == oldTiles[i].address)){
 				Destroy(oldTiles[i].mesh);

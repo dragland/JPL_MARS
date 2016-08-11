@@ -17,7 +17,7 @@ using System.Collections;
 *********************************************************************/
 public class AnimateRover : MonoBehaviour {
 	/* ****************  EDITABLE CONSTANTS  ****************  */
-	public float animationSpeed = 2f;
+	public float animationSpeed = 1f;
 	public bool animate = false;
 	/* ****************  GLOBAL OBJECTS  ****************  */
 	private Animator anim;

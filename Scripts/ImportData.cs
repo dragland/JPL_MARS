@@ -75,7 +75,7 @@ public class ImportData : MonoBehaviour {
 	This function displays or removes the loaded datapoints.
 	*/
 	void displayData(){
-		if (Input.GetKeyDown ("`")) lr.enabled = !lr.enabled;
+		if (Input.GetButton ("L_Bumper")) lr.enabled = !lr.enabled;
 	}
 }
 
