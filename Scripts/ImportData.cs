@@ -1,5 +1,5 @@
 ﻿/*
-   Jet Ppropulsion Laboratory
+   Jet Propulsion Laboratory
    Virtual Reality for Mars Rovers | Summer 2016
    Davy Ragland | dragland@stanford.edu
    Victor Ardulov | victorardulov@gmail.com
@@ -7,7 +7,7 @@
 */
 
 /*********************************************************************
-                          SETUP
+                           SETUP
 *********************************************************************/
 using UnityEngine;
 using System.Collections;

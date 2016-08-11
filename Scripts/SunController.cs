@@ -1,5 +1,5 @@
 ﻿/*
-   Jet Ppropulsion Laboratory
+   Jet Propulsion Laboratory
    Virtual Reality for Mars Rovers | Summer 2016
    Davy Ragland | dragland@stanford.edu
    Victor Ardulov | victorardulov@gmail.com
@@ -43,6 +43,7 @@ public class SunController : MonoBehaviour {
 		resetCheck();
 		updateSunRotation();
 		updateSunLight();
+		if (Input.GetKeyDown ("1")) updateSunShadows();
 	}
 	/**********************************************************************
 	                           FUNCTIONS
@@ -68,6 +69,15 @@ public class SunController : MonoBehaviour {
 		sun.intensity = intensity;
 	}
 		
+	/*
+	function: updateSunShadows
+	---------------------------------
+	This function toggles the shadows casted from the sunlight.
+	*/
+	void updateSunShadows(){
+		if (sun.shadowStrength == 1) sun.shadowStrength = 0;
+		else sun.shadowStrength = 1;
+	}
 	/**********************************************************************
 	                              HELPERS 
 	*********************************************************************/

@@ -1,5 +1,5 @@
 ﻿/*
-   Jet Ppropulsion Laboratory
+   Jet Propulsion Laboratory
    Virtual Reality for Mars Rovers | Summer 2016
    Davy Ragland | dragland@stanford.edu
    Victor Ardulov | victorardulov@gmail.com
@@ -17,9 +17,9 @@ using System.Collections;
 *********************************************************************/
 public class OVRMovePLayer : MonoBehaviour {
 	/* ****************  EDITABLE CONSTANTS  ****************  */
-	public float transformVelocity = 10.0f;
+	public float transformVelocity = 0.1f;
 	public float rotateVelocity    = 1.0f;
-	public int hoverHeight         = 15;
+	public int hoverHeight         = 1;
 	/* ****************  GLOBAL OBJECTS  ****************  */
 	private Vector3 startPos;
 	private Quaternion startRot;
@@ -111,7 +111,7 @@ public class OVRMovePLayer : MonoBehaviour {
 	*/
 	int getTravelSpeed(){
 		if (Input.GetButton ("leftShift"))
-			return 5;
+			return 50;
 		return 1;
 	}
 

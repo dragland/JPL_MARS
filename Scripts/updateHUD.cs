@@ -1,5 +1,5 @@
 ﻿/*
-   Jet Ppropulsion Laboratory
+   Jet Propulsion Laboratory
    Virtual Reality for Mars Rovers | Summer 2016
    Davy Ragland | dragland@stanford.edu
    Victor Ardulov | victorardulov@gmail.com
@@ -24,7 +24,6 @@ public class updateHUD : MonoBehaviour {
 	public Camera camera;
 	public GameObject Reticle;
 	public GameObject Mesh;
-	public Texture2D dataSet;
 	/* ****************  GLOBAL OBJECTS  ****************  */
 	private Text text_1;
 	private Text text_2;
@@ -94,9 +93,7 @@ public class updateHUD : MonoBehaviour {
 		string myY = (hit.point.z).ToString("0.00");
 		string myZ = (-1 * (hit.point.y)).ToString("0.00");
 		string range = (hit.distance).ToString("0.00");
-		string RGBA = "temporary";//getRGBA(hit.textureCoord.x, hit.textureCoord.y);
-		string elevation = getElevation(hit.textureCoord.x, hit.textureCoord.y);
-		text_3.text = "X = " + myX + "\nY = " + myY + "\nZ = " + myZ + "\nrange = " + range + "\nRGBA :" + RGBA + "\nelevation :" + elevation;
+		text_3.text = "X = " + myX + "\nY = " + myY + "\nZ = " + myZ + "\nrange = " + range;
 	}
 
 	/**********************************************************************
@@ -123,34 +120,5 @@ public class updateHUD : MonoBehaviour {
 		text_2.enabled = !text_2.enabled;
 		text_3.enabled = !text_3.enabled;
 		Reticle.GetComponent<MeshRenderer>().enabled = !Reticle.GetComponent<MeshRenderer>().enabled;
-	}	
-	/*
-	function: getRGBA
-	---------------------------------
-	This function returns the RGBA value of the visable layer being pointed at
-	by the reticule.
-	*/
-	string getRGBA(float textureX, float textureY){
-		int layerIndex  = Mesh.GetComponent<ToggleLayers>().layerIndex;
-		Texture2D layer = Mesh.GetComponent<ToggleLayers>().layers[layerIndex].mainTexture as Texture2D;
-		int layerX = Mathf.FloorToInt(textureX * layer.width);
-		int layerY = Mathf.FloorToInt(textureY * layer.height);
-		int pixelR = Mathf.FloorToInt(layer.GetPixel(layerX, layerY).r * 255);
-		int pixelG = Mathf.FloorToInt(layer.GetPixel(layerX, layerY).g * 255);
-		int pixelB = Mathf.FloorToInt(layer.GetPixel(layerX, layerY).b * 255);
-		int pixelA = Mathf.FloorToInt(layer.GetPixel(layerX, layerY).a * 255);
-		return pixelR.ToString() + ":" + pixelG.ToString() +  ":" + pixelB.ToString() + ":" + pixelA.ToString();
-	}
-
-	/*
-	function: getElevation
-	---------------------------------
-	This function returns the grayscaled hard coded elevation value of this mesh
-	*/
-	string getElevation(float textureX, float textureY){
-		int layerX = Mathf.FloorToInt(textureX * dataSet.width);
-		int layerY = Mathf.FloorToInt(textureY * dataSet.height);
-		float elevation = Mathf.FloorToInt(dataSet.GetPixel(layerX, layerY).grayscale * 255);
-		return elevation.ToString();
 	}
 }
