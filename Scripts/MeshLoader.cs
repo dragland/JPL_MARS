@@ -16,7 +16,7 @@ using System.Collections;
 *********************************************************************/
 public class MeshLoader : MonoBehaviour {
 	/* ****************  EDITABLE CONSTANTS  ****************  */
-	public string URL = "http://mipldevlinux7.jpl.nasa.gov:7733/JPL_MARS/src/Bundles/";
+	public string URL = "http://137.78.208.219/bundles/";
 	public GameObject player;
 	public GameObject startMesh;
 	public int tileSize = 50000;
@@ -82,7 +82,7 @@ public class MeshLoader : MonoBehaviour {
 	*/
 	void deleteTiles(){
 		for (int i = 0; i < tileArraySize; i++) {
-			if(isNotIn(i, oldTiles, newTiles) || (i != 0 && oldTiles[0].address == oldTiles[i].address)){
+			if(isNotIn(i, oldTiles, newTiles) || ((i != 0) && (oldTiles[i].address == oldTiles[0].address))){
 				Destroy(oldTiles[i].mesh);
 			}
 		}
@@ -95,7 +95,8 @@ public class MeshLoader : MonoBehaviour {
 	*/
 	void cleanTiles(){
 		for (int i = 0; i < tileArraySize; i++) {
-			oldTiles[i] = newTiles[i];
+			oldTiles[i].address = newTiles[i].address;
+			oldTiles[i].mesh = newTiles[i].mesh;
 		}
 	}
 
