@@ -45,7 +45,7 @@ public class MeshToAssetBuilder : MonoBehaviour {
 	under the Assets/Mesh/ folder.
 	*/
 	static void parseMeshes(string name){
-		foreach (FileInfo obj in importMeshes("Assets/Mesh/")) {
+		foreach (FileInfo obj in importMeshes("Assets/Swap/")) {
 			string path = "Assets" + obj.FullName.Substring(Application.dataPath.Length);
 			addToAssetBundle(path, name);
 			renderPreview(path);
@@ -82,8 +82,8 @@ public class MeshToAssetBuilder : MonoBehaviour {
 	This function adds the mesh to its respective assetBundle.
 	*/
 	static void addToAssetBundle(string path, string name){
-		AssetImporter assetImporter = AssetImporter.GetAtPath(path);
-		assetImporter.assetBundleName = name;
+		AssetImporter asset = AssetImporter.GetAtPath(path);
+		asset.assetBundleName = name;
 
 	}
 
